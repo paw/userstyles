@@ -41,7 +41,7 @@
 @advanced color paren "Strings" #F1FA8C
 ==/UserStyle== */
 
-@-moz-document url-prefix("https://nekoweb.org/dashboard/editor/") {
+@-moz-document url-prefix("https://nekoweb.org/dashboard/editor") {
     #editor-body #editor {
         --font: /*[[font]]*/;
         --cursor: /*[[cursor]]*/;
