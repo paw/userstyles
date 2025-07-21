@@ -3,7 +3,7 @@
 @namespace      https://github.com/paw
 @homepageURL    https://github.com/paw/userstyles
 @supportURL     https://github.com/paw/userstyles/issues
-@version        1.0.0
+@version        1.1.0
 @description    Custom color theme for the Nekoweb.org editor.
 @author         briar
 
@@ -16,7 +16,7 @@
   "yes:Yes": "0.1",
   "no:No": "0"
 }
-@advanced text font "Font (Monospace Only, Default val to use NekoWeb Font)" "inherit"
+@advanced text font "Font (Monospace Only, Default val for site's Font Dropdown)" "inherit"
 @advanced color cursor "Cursor" #6272A4
 @advanced color bg "Background" #282A36
 @advanced color text "Text" #F8F8F2
@@ -29,7 +29,7 @@
 @advanced color comment "Comments" #6272A4
 @advanced color constant "Constants" #BD93F9
 @advanced color keyword "Keywords" #FF79C6
-@advanced color bracket "Brackets" #44475A
+@advanced color bracket "Matching Brackets Highlight BG" #44475A
 @advanced color variable "Variables/Function Params/HTML Tags" #FF79C6
 @advanced color css "Inline CSS" #50FA7B
 @advanced color operator "Operators" #FFB86C
@@ -42,7 +42,7 @@
 ==/UserStyle== */
 
 @-moz-document url-prefix("https://nekoweb.org/dashboard/editor") {
-    #editor-body #editor {
+    #editor-body #editor/*[[theme]]*/, .ace_editor/*[[theme]]*/ {
         --font: /*[[font]]*/;
         --cursor: /*[[cursor]]*/;
         --bg: /*[[bg]]*/;
@@ -50,6 +50,7 @@
         --text-rgb: /*[[text-rgb]]*/;
         --gbg: /*[[gutterbg]]*/;
         --gtext: /*[[guttertext]]*/;
+        --gtext-rgb: /*[[guttertext-rgb]]*/;
         --selection: /*[[selection]]*/;
         --active: /*[[active]]*/;
         --bracket-start: /*[[bracket]]*/;
@@ -69,9 +70,7 @@
         --builtin: /*[[builtin]]*/;
         --paren: /*[[paren]]*/;
         --regexp: /*[[regexp]]*/;
-    }
-    #editor/*[[theme]]*/
-    {
+        
         background-color: var(--bg);
         color: var(--text);
     }
@@ -89,6 +88,7 @@
         color: var(--gtext);
         background-image: none !important;
         border: none !important;
+        text-shadow: none;
     }
 
     /*[[theme]]*/ .ace_print-margin {
@@ -111,7 +111,7 @@
 
     /*[[theme]]*/ .ace_multiselect .ace_selection.ace_start {
         box-shadow: none;
-        background: lime;
+        background: var(--selection);
     }
 
     /*[[theme]]*/ :is(.ace_marker-layer .ace_bracket, .ace_marker-layer .ace_bracket-start) {
@@ -160,26 +160,24 @@
         color: var(--operator)
     }
 
+    /*[[theme]]*/ :is(.ace_support.ace_constant, .ace_constant) {
+        color: var(--constant)
+    }
+    
     /*[[theme]]*/ :is(.ace_constant.ace_character, .ace_constant.ace_language, .ace_constant.ace_numeric, .ace_keyword.ace_other.ace_unit, .ace_variable.ace_parameter, .ace_entity.ace_name.ace_tag, .ace_entity.ace_other.ace_attribute-name, .ace_meta.ace_tag) {
         color: var(--variable)
-    }
-
-    /*[[theme]]*/ .ace_support.ace_constant {
-        color: var(--constant)
     }
 
     /*[[theme]]*/ :is(.ace_constant.ace_other, .ace_string) {
         color: var(--paren)
     }
 
-    /*[[theme]]*/
-    .ace_invalid {
+    /*[[theme]]*/ .ace_invalid {
         color: var(--text);
         background-color: var(--error)
     }
 
-    /*[[theme]]*/
-    .ace_invalid.ace_deprecated {
+    /*[[theme]]*/ .ace_invalid.ace_deprecated {
         color: var(--text);
         background-color: var(--deprecated)
     }
@@ -193,8 +191,7 @@
         color: var(--function)
     }
 
-    /*[[theme]]*/
-    .ace_variable.ace_language {
+    /*[[theme]]*/ .ace_variable.ace_language {
         color: var(--builtin);
     }
 
@@ -215,7 +212,6 @@
     }
 
     /*[[theme]]*/ .ace_indent-guide {
-        /*rgba(var(--text-rgb), 0.5)*/
         background: linear-gradient(0deg, rgba(var(--text-rgb),0.2) 0%, transparent 100%) right repeat-y;
         background-size: 1px 2px;
     }
@@ -258,5 +254,39 @@
         -moz-box-shadow: none;
         -o-box-shadow: none;
         box-shadow: none;
+    }
+    /*auto complete*/
+    /*[[theme]]*/.ace_autocomplete .ace_marker-layer .ace_active-line {
+        background-color: var(--gbg);
+    }
+    /*[[theme]]*/.ace_editor.ace_autocomplete .ace_line.ace_selected {
+        background-color: var(--active);
+    }
+    /*[[theme]]*/.ace_editor.ace_autocomplete .ace_line-hover {
+        border: 1px solid rgba(var(--gtext-rgb), 0.5);
+        background: rgba(var(--gbg-rgb), 0.2);
+    }
+    /*[[theme]]*/.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {
+        background: var(--gbg);
+    }
+    /*[[theme]]*/ .ace_completion-meta {
+        opacity: 1;
+        margin: 0.9em;
+        color: var(--constant);
+    }
+    /*[[theme]]*/ .ace_completion-message {
+        color: var(--text);
+    }
+    /*[[theme]]*/.ace_editor.ace_autocomplete .ace_completion-highlight{
+        color: var(--keyword);
+    }
+    /*[[theme]]*/.ace_editor.ace_autocomplete {
+        font-family: var(--font);
+        border: 2px solid var(--gbg);
+        outline: 2px solid rgba(var(--gtext-rgb),0.5);
+        box-shadow: 2px 5px 2px rgba(0,0,0,0.1);
+        line-height: 1.4;
+        background: var(--bg);
+        color: var(--text);
     }
 }
