@@ -1,0 +1,262 @@
+/* ==UserStyle==
+@name           Nekoweb Editor Custom Theme
+@namespace      https://github.com/paw
+@homepageURL    https://github.com/paw/userstyles
+@supportURL     https://github.com/paw/userstyles/issues
+@version        1.0.0
+@description    Custom color theme for the Nekoweb.org editor.
+@author         briar
+
+@advanced select theme "Replace Which Theme?" {
+  "light:Light": ".ace-solarized-light",
+  "dark:Dark": ".ace-ambiance",
+  "ultradark:UltraDark" : ".ace-terminal-theme"
+}
+@advanced select printmargin "Show Print Margin" {
+  "yes:Yes": "0.1",
+  "no:No": "0"
+}
+@advanced text font "Font (Monospace Only, Default val to use NekoWeb Font)" "inherit"
+@advanced color cursor "Cursor" #6272A4
+@advanced color bg "Background" #282A36
+@advanced color text "Text" #F8F8F2
+@advanced color gutterbg "Gutter Background" #1c1e27
+@advanced color guttertext "Gutter Text" #6272A4
+@advanced color selection "Selection Background" #1c1e27
+@advanced color active "Active Line" #44475A
+@advanced color error "Invalid/Unmatched" #FF5555
+@advanced color deprecated "Deprecated" #BD93F9
+@advanced color comment "Comments" #6272A4
+@advanced color constant "Constants" #BD93F9
+@advanced color keyword "Keywords" #FF79C6
+@advanced color bracket "Brackets" #44475A
+@advanced color variable "Variables/Function Params/HTML Tags" #FF79C6
+@advanced color css "Inline CSS" #50FA7B
+@advanced color operator "Operators" #FFB86C
+@advanced color function "Function Names" #50FA7B
+@advanced color storage "Storage" #FF79C6
+@advanced color types "Classes/Types" #8BE9FD
+@advanced color builtin "Built in Methods/Constants" #BD93F9
+@advanced color regexp "Regexp" #FF5555
+@advanced color paren "Strings" #F1FA8C
+==/UserStyle== */
+
+@-moz-document url-prefix("https://nekoweb.org/dashboard/editor/") {
+    #editor-body #editor {
+        --font: /*[[font]]*/;
+        --cursor: /*[[cursor]]*/;
+        --bg: /*[[bg]]*/;
+        --text: /*[[text]]*/;
+        --text-rgb: /*[[text-rgb]]*/;
+        --gbg: /*[[gutterbg]]*/;
+        --gtext: /*[[guttertext]]*/;
+        --selection: /*[[selection]]*/;
+        --active: /*[[active]]*/;
+        --bracket-start: /*[[bracket]]*/;
+        --bracket-unmatched: var(--error);
+        --constant: /*[[constant]]*/;
+        --variable: /*[[variable]]*/;
+        --keyword: /*[[keyword]]*/;
+        --comment: /*[[comment]]*/;
+        --bracket: /*[[bracket]]*/;
+        --css: /*[[css]]*/;
+        --operator: /*[[operator]]*/;
+        --function: /*[[function]]*/;
+        --storage: /*[[storage]]*/;
+        --types: /*[[types]]*/;
+        --error: /*[[error]]*/;
+        --deprecated: /*[[deprecated]]*/;
+        --builtin: /*[[builtin]]*/;
+        --paren: /*[[paren]]*/;
+        --regexp: /*[[regexp]]*/;
+    }
+    #editor/*[[theme]]*/
+    {
+        background-color: var(--bg);
+        color: var(--text);
+    }
+    #editor/*[[theme]]*/ > *
+    {
+        font-family: var(--font) !important;
+    }
+
+    /*[[theme]]*/ :is(.ace_text-layer, .ace_gutter-layer) {
+        background-image: none !important;
+    }
+    
+    /*[[theme]]*/ .ace_gutter {
+        background: var(--gbg);
+        color: var(--gtext);
+        background-image: none !important;
+        border: none !important;
+    }
+
+    /*[[theme]]*/ .ace_print-margin {
+        width: 1px;
+        background: rgba(var(--text-rgb), /*[[printmargin]]*/);
+        border: none;
+    }
+
+    /*[[theme]]*/ :is(.ace_paren, .ace_punctuation.ace_operator) {
+        color: rgba(var(--text-rgb), 0.5);
+    }
+
+    /*[[theme]]*/ .ace_cursor {
+        color: var(--cursor)
+    }
+
+    /*[[theme]]*/ :is(.ace_marker-layer .ace_selection, .ace_marker-layer .ace_step) {
+        background: var(--selection)
+    }
+
+    /*[[theme]]*/ .ace_multiselect .ace_selection.ace_start {
+        box-shadow: none;
+        background: lime;
+    }
+
+    /*[[theme]]*/ :is(.ace_marker-layer .ace_bracket, .ace_marker-layer .ace_bracket-start) {
+        background: var(--bracket);
+        border: 1px solid rgba(var(--text-rgb), 0.25);
+    }
+
+    /*[[theme]]*/ .ace_marker-layer .ace_bracket-unmatched {
+        margin: -1px 0 0 -1px;
+        border: 1px solid var(--error)
+    }
+
+    /*[[theme]]*/ .ace_marker-layer .ace_active-line {
+        background: var(--active)
+    }
+
+    /*[[theme]]*/ .ace_gutter-active-line {
+        background-color: var(--active);
+        color: var(--text)
+    }
+
+    /*[[theme]]*/ .ace_marker-layer .ace_selected-word {
+        border: 1px solid var(--cursor);
+        outline: 1px solid rgba(var(--text-rgb),0.4);
+        background: var(--selection);
+        box-shadow: none;
+    }
+
+    /*[[theme]]*/ .ace_invisible {
+        color: rgba(var(--text-rgb),0.5);
+    }
+
+    /*[[theme]]*/ :is(.ace_keyword, .ace_meta) {
+        color: var(--keyword)
+    }
+
+    /*[[theme]]*/ .ace_storage {
+        color: var(--storage)
+    }
+
+    /*[[theme]]*/ :is(.ace_storage.ace_type, .ace_support.ace_type) {
+        color: var(--types)
+    }
+
+    /*[[theme]]*/ .ace_keyword.ace_operator {
+        color: var(--operator)
+    }
+
+    /*[[theme]]*/ :is(.ace_constant.ace_character, .ace_constant.ace_language, .ace_constant.ace_numeric, .ace_keyword.ace_other.ace_unit, .ace_variable.ace_parameter, .ace_entity.ace_name.ace_tag, .ace_entity.ace_other.ace_attribute-name, .ace_meta.ace_tag) {
+        color: var(--variable)
+    }
+
+    /*[[theme]]*/ .ace_support.ace_constant {
+        color: var(--constant)
+    }
+
+    /*[[theme]]*/ :is(.ace_constant.ace_other, .ace_string) {
+        color: var(--paren)
+    }
+
+    /*[[theme]]*/
+    .ace_invalid {
+        color: var(--text);
+        background-color: var(--error)
+    }
+
+    /*[[theme]]*/
+    .ace_invalid.ace_deprecated {
+        color: var(--text);
+        background-color: var(--deprecated)
+    }
+
+    /*[[theme]]*/ .ace_fold {
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    /*[[theme]]*/ :is(.ace_entity.ace_name.ace_function, .ace_support.ace_function, .ace_variable) {
+        color: var(--function)
+    }
+
+    /*[[theme]]*/
+    .ace_variable.ace_language {
+        color: var(--builtin);
+    }
+
+    /*[[theme]]*/ :is(.ace_support.ace_class, .ace_support.ace_type, .ace_doctype, .ace_xml-pe) {
+        color: var(--types)
+    }
+
+    /*[[theme]]*/ :is(.ace_heading, .ace_attribute-value) {
+        color: var(--css)
+    }
+
+    /*[[theme]]*/ .ace_string.ace_regexp {
+        color: var(--regexp)
+    }
+
+    /*[[theme]]*/ .ace_comment {
+        color: var(--comment)
+    }
+
+    /*[[theme]]*/ .ace_indent-guide {
+        /*rgba(var(--text-rgb), 0.5)*/
+        background: linear-gradient(0deg, rgba(var(--text-rgb),0.2) 0%, transparent 100%) right repeat-y;
+        background-size: 1px 2px;
+    }
+
+    /*[[theme]]*/ .ace_indent-guide-active {
+        background: linear-gradient(0deg, rgba(var(--text-rgb),0.4) 0%, transparent 100%) right repeat-y;
+        background-size: 1px 2px;
+    }
+
+    /*[[theme]]*/ .ace_fold-widget {
+        text-align: center;
+    }
+
+    /*[[theme]]*/ .ace_fold-widget:hover {
+        color: var(--text);
+    }
+    /*[[theme]]*/ .ace_gutter-active-line .ace_fold-widget:hover {
+        color: var(--gtext);
+    }
+
+    /*[[theme]]*/ :is(.ace_fold-widget.ace_start, .ace_fold-widget.ace_end, ace_fold-widget.ace_closed) {
+        background: none !important;
+        border: none;
+        box-shadow: none;
+    }
+
+    /*[[theme]]*/ .ace_fold-widget.ace_start:after {
+        content: '▾'
+    }
+
+    /*[[theme]]*/ .ace_fold-widget.ace_end:after {
+        content: '▴'
+    }
+
+    /*[[theme]]*/ .ace_fold-widget.ace_closed:after {
+        content: '‣'
+    }
+    /*[[theme]]*/ .ace_scroller {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -o-box-shadow: none;
+        box-shadow: none;
+    }
+}
