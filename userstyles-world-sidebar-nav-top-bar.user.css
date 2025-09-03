@@ -1,0 +1,50 @@
+/* ==UserStyle==
+@name           Userstyles.world Sidebar Nav: Top Bar for Big Screens
+@namespace      https://github.com/paw
+@homepageURL    https://github.com/paw/userstyles
+@supportURL     https://github.com/paw/userstyles/issues
+@version        1.0.0
+@description    Brings back the top bar for larger screen sizes when Sidebar Navigation is enabled.
+@author         briar
+==/UserStyle== */
+
+@-moz-document domain("userstyles.world") {
+    @media screen and (min-width: 1150px) {
+        [data-flags*="sidebar"] {
+            --sidebar-width: 0;
+            flex-flow: column wrap;
+        }
+        [data-flags*="sidebar"] #navbar {
+            position: sticky;
+            z-index: 9;
+            top: 0;
+            bottom: unset;
+            background: var(--bg-2);
+            border-bottom: 1px solid var(--bg-4);
+            --sidebar-width: 100%;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+        [data-flags*="sidebar"] #navbar .menu {
+            flex-flow: row nowrap;
+            justify-content: flex-end;
+            gap: 0px;
+        }
+        [data-flags*="sidebar"] #navbar .Dropdown, #navbar .Dropdown ul {
+            display: flex;
+            flex-direction: row;
+        }
+        [data-flags*="sidebar"] #navbar .Dropdown ul, #navbar .Dropdown:hover > ul {
+            display: flex !important;
+        }
+        [data-flags*="sidebar"] #navbar .Dropdown .btn.icon {
+            display: none;
+        }
+    }
+    @media screen and (min-width: 1500px) {
+        [data-flags*="sidebar"] #navbar {
+            justify-content: center;
+            grid-gap: 5rem;
+        }
+    }
+}
