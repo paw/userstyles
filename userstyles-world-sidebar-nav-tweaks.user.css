@@ -3,7 +3,7 @@
 @namespace      https://github.com/paw
 @homepageURL    https://github.com/paw/userstyles
 @supportURL     https://github.com/paw/userstyles/issues
-@version        1.0.0
+@version        1.0.1
 @description    Tweaks for Userstyles.world's Sidebar Navigation Layout
 @author         briar
 @preprocessor   stylus
@@ -31,6 +31,16 @@
     }
     [data-flags*="sidebar"] #navbar {
         background: var(--bg-2);
+    }
+    @media screen and (max-width: 887.98px) {
+        [data-flags*="sidebar"] #navbar .menu {
+            background: var(--bg-2);
+            border-bottom: 1px solid var(--bg-3);
+            margin-top: -1px;
+        }
+        [data-flags*="sidebar"] #navbar .menu .btn {
+            background: var(--bg-1);
+        }
     }
     
     if (right_side_nav) {
