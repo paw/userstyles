@@ -1,5 +1,5 @@
 # Miscellaneous Userstyles
-One-off userstyles that aren't noteworthy enough to have their own repo.
+One-off userstyles that aren't substantial enough to justify their own repo.
 
 ----
 
